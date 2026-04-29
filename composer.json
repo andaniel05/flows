@@ -5,11 +5,26 @@
             "Andaniel05\\Flows\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Andy Navarro",
             "email": "andaniel05@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=8.5"
+    },
+    "require-dev": {
+        "pestphp/pest": "^4.6"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
 }

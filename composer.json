@@ -1,0 +1,15 @@
+{
+    "name": "andaniel05/flows",
+    "autoload": {
+        "psr-4": {
+            "Andaniel05\\Flows\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andy Navarro",
+            "email": "andaniel05@gmail.com"
+        }
+    ],
+    "require": {}
+}

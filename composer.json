@@ -1,5 +1,8 @@
 {
     "name": "andaniel05/flows",
+    "type": "library",
+    "description": "Step-by-step implementations",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Andaniel05\\Flows\\": "src/"

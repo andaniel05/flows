@@ -8,6 +8,8 @@ class Flow
 {
     protected array $steps = [];
 
+    protected array $initExecutionListeners = [];
+
     public function addStep(string|callable $name, ?callable $handler = null, string $branchName = 'default'): void
     {
         $this->steps[$branchName] ??= [];
@@ -31,9 +33,24 @@ class Flow
         return $this->steps;
     }
 
+    public function addInitExecutionListener(callable $listener): void
+    {
+        $this->initExecutionListeners[] = $listener;
+    }
+
+    public function clearInitExecutionListeners(): void
+    {
+        $this->initExecutionListeners = [];
+    }
+
     public function run(): Execution
     {
         $execution = new Execution($this);
+
+        foreach ($this->initExecutionListeners as $initExecutionListener) {
+            $initExecutionListener($execution);
+        }
+
         $execution->startedAt = new \DateTimeImmutable;
 
         while ($step = $execution->getNextStep()) {

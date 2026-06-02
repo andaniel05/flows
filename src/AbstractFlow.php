@@ -58,6 +58,6 @@ abstract class AbstractFlow
 
         $this->currentExecution = null;
 
-        return $flow->run();
+        return $flow->execute();
     }
 }

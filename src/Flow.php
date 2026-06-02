@@ -43,7 +43,7 @@ class Flow
         $this->initExecutionListeners = [];
     }
 
-    public function run(): Execution
+    public function execute(): Execution
     {
         $execution = new Execution($this);
 

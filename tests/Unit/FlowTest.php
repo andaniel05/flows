@@ -23,7 +23,7 @@ describe('add the first anonymous step handler', function () {
         });
 
         test('when flow is executed without subject both handlers are also executed', function () {
-            $this->flow->run();
+            $this->flow->execute();
 
             expect($this->result)->toBe(['one', 'two']);
         });
@@ -43,7 +43,7 @@ describe('add the first anonymous step handler', function () {
         });
 
         test('when the flow is executed only the two top handlers were executed', function () {
-            $this->flow->run();
+            $this->flow->execute();
 
             expect($this->result)->toBe(['one', 'two']);
         });
@@ -72,7 +72,7 @@ describe('', function () {
             $this->result[] = 'five';
         }, branchName: 'branch1');
 
-        $this->flow->run();
+        $this->flow->execute();
 
         expect($this->result)->toBe(['one', 'two', 'three']);
     });
@@ -106,7 +106,7 @@ describe('', function () {
             $this->result[] = 'six';
         }, branchName: 'branch1');
 
-        $this->flow->run();
+        $this->flow->execute();
 
         expect($this->result)->toBe(['one', 'two', 'three', 'four', 'five']);
     });

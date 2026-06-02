@@ -24,7 +24,7 @@ abstract class AbstractFlow
         $this->currentExecution?->continueToBranch($branchName);
     }
 
-    public function run(): Execution
+    public function execute(): Execution
     {
         $flow = new Flow;
 

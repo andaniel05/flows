@@ -38,7 +38,7 @@ test('case 1', function () {
         }
     };
 
-    $myFlow->run();
+    $myFlow->execute();
 
     expect($record->items)->toBe(['one', 'two', 'three']);
 });
@@ -89,7 +89,7 @@ test('case 2', function () {
         }
     };
 
-    $myFlow->run();
+    $myFlow->execute();
 
     expect($record->items)->toBe(['one', 'two', 'three', 'four']);
 });

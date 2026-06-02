@@ -9,6 +9,34 @@ abstract class AbstractFlow
 {
     protected ?Execution $currentExecution = null;
 
+    public static function getBranches(): array
+    {
+        $branches = [];
+
+        $class = new \ReflectionClass(static::class);
+        $publicMethods = $class->getMethods(\ReflectionMethod::IS_PUBLIC);
+
+        foreach ($publicMethods as $method) {
+            $stepAttributes = $method->getAttributes(StepAttribute::class);
+
+            /** @var \ReflectionAttribute|null */
+            $stepReflectionAttribute = array_last($stepAttributes);
+
+            if (! $stepReflectionAttribute) {
+                continue;
+            }
+
+            $methodName = $method->getName();
+            $stepAttribute = $stepReflectionAttribute->newInstance();
+            $branchName = $stepAttribute->branchName;
+
+            $branches[$branchName] ??= [];
+            $branches[$branchName][] = $methodName;
+        }
+
+        return $branches;
+    }
+
     public function abort(): void
     {
         $this->currentExecution?->abort();

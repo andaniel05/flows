@@ -41,6 +41,14 @@ test('case 1', function () {
     $myFlow->execute();
 
     expect($record->items)->toBe(['one', 'two', 'three']);
+
+    $class = get_class($myFlow);
+    $branches = call_user_func([$class, 'getBranches']);
+
+    expect($branches)->toBe([
+        'default' => ['step1', 'step2', 'step3'],
+        'branch1' => ['step4'],
+    ]);
 });
 
 test('case 2', function () {
@@ -92,4 +100,12 @@ test('case 2', function () {
     $myFlow->execute();
 
     expect($record->items)->toBe(['one', 'two', 'three', 'four']);
+
+    $class = get_class($myFlow);
+    $branches = call_user_func([$class, 'getBranches']);
+
+    expect($branches)->toBe([
+        'default' => ['step1', 'step2', 'step3'],
+        'branch1' => ['step4', 'step5'],
+    ]);
 });

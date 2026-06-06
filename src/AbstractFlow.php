@@ -20,7 +20,7 @@ abstract class AbstractFlow
     {
         $branches = self::getBranches();
 
-        if (! in_array($branchName, $branches)) {
+        if (! array_key_exists($branchName, $branches)) {
             $class = get_class($this);
             throw new \Exception("Missing branch '$branchName' in flow '$class'.");
         }
@@ -68,7 +68,7 @@ abstract class AbstractFlow
 
     public function continueToBranch(string $branchName): void
     {
-        $this->currentBranchName = $branchName;
+        $this->setCurrentBranchName($branchName);
 
         $this->currentExecution?->continueToBranch($branchName);
     }

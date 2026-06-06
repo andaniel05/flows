@@ -109,3 +109,51 @@ test('case 2', function () {
         'branch1' => ['step4', 'step5'],
     ]);
 });
+
+test('case 3', function () {
+    $record = new stdClass;
+    $record->items = [];
+
+    $myFlow = new class($record) extends AbstractFlow {
+
+        public function __construct(
+            public stdClass $record
+        ) {}
+
+        #[Step]
+        public function step1(): void
+        {
+            $this->record->items[] = 'one';
+        }
+
+        #[Step]
+        public function step2(): void
+        {
+            $this->record->items[] = 'two';
+        }
+
+        #[Step]
+        public function step3(): void
+        {
+            $this->record->items[] = 'three';
+            $this->continueToBranch('branch1');
+        }
+
+        #[Step(branchName: 'branch1')]
+        public function step4(): void
+        {
+            $this->record->items[] = 'four';
+        }
+
+        #[Step(branchName: 'branch1')]
+        public function step5(): void
+        {
+            $this->record->items[] = 'five';
+        }
+    };
+
+    $myFlow->continueToBranch('branch1');
+    $myFlow->execute();
+
+    expect($record->items)->toBe(['four', 'five']);
+});

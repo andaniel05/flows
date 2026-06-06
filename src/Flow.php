@@ -43,9 +43,10 @@ class Flow
         $this->initExecutionListeners = [];
     }
 
-    public function execute(): Execution
+    public function execute(string $branchName = 'default'): Execution
     {
         $execution = new Execution($this);
+        $execution->continueToBranch($branchName);
 
         foreach ($this->initExecutionListeners as $initExecutionListener) {
             $initExecutionListener($execution);

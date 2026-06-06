@@ -9,6 +9,25 @@ abstract class AbstractFlow
 {
     protected ?Execution $currentExecution = null;
 
+    protected string $currentBranchName = 'default';
+
+    public function getCurrentBranchName(): string
+    {
+        return $this->currentBranchName;
+    }
+
+    public function setCurrentBranchName(string $branchName): void
+    {
+        $branches = self::getBranches();
+
+        if (! in_array($branchName, $branches)) {
+            $class = get_class($this);
+            throw new \Exception("Missing branch '$branchName' in flow '$class'.");
+        }
+
+        $this->currentBranchName = $branchName;
+    }
+
     public static function getBranches(): array
     {
         $branches = [];
@@ -49,6 +68,8 @@ abstract class AbstractFlow
 
     public function continueToBranch(string $branchName): void
     {
+        $this->currentBranchName = $branchName;
+
         $this->currentExecution?->continueToBranch($branchName);
     }
 
@@ -86,6 +107,6 @@ abstract class AbstractFlow
 
         $this->currentExecution = null;
 
-        return $flow->execute();
+        return $flow->execute($this->currentBranchName);
     }
 }

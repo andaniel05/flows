@@ -7,5 +7,5 @@ use Attribute;
 #[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_FUNCTION)]
 class Step
 {
-    public function __construct(public string $branchName = 'default') {}
+    public function __construct(public string $branchName = 'Default') {}
 }

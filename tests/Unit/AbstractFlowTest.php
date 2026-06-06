@@ -46,7 +46,7 @@ test('case 1', function () {
     $branches = call_user_func([$class, 'getBranches']);
 
     expect($branches)->toBe([
-        'default' => ['step1', 'step2', 'step3'],
+        'Default' => ['step1', 'step2', 'step3'],
         'branch1' => ['step4'],
     ]);
 });
@@ -105,7 +105,7 @@ test('case 2', function () {
     $branches = call_user_func([$class, 'getBranches']);
 
     expect($branches)->toBe([
-        'default' => ['step1', 'step2', 'step3'],
+        'Default' => ['step1', 'step2', 'step3'],
         'branch1' => ['step4', 'step5'],
     ]);
 });

@@ -9,7 +9,7 @@ abstract class AbstractFlow
 {
     protected ?Execution $currentExecution = null;
 
-    protected string $currentBranchName = 'default';
+    protected string $currentBranchName = 'Default';
 
     public function getCurrentBranchName(): string
     {

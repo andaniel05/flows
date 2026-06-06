@@ -6,11 +6,13 @@ use DateTimeImmutable;
 
 class Flow
 {
-    protected array $steps = [];
+    protected array $steps = [
+        'Default' => [],
+    ];
 
     protected array $initExecutionListeners = [];
 
-    public function addStep(string|callable $name, ?callable $handler = null, string $branchName = 'default'): void
+    public function addStep(string|callable $name, ?callable $handler = null, string $branchName = 'Default'): void
     {
         $this->steps[$branchName] ??= [];
 
@@ -43,7 +45,7 @@ class Flow
         $this->initExecutionListeners = [];
     }
 
-    public function execute(string $branchName = 'default'): Execution
+    public function execute(string $branchName = 'Default'): Execution
     {
         $execution = new Execution($this);
         $execution->continueToBranch($branchName);

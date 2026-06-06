@@ -4,7 +4,7 @@ namespace Andaniel05\Flows;
 
 class Execution
 {
-    protected string $currentBranchName = 'default';
+    protected string $currentBranchName = 'Default';
 
     public ?\DateTimeImmutable $startedAt = null;
 
